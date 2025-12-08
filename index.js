@@ -20,7 +20,13 @@ async function run()
             const ver = parse_version(verElement.data);
             if (ver)
             {
-                core.setOutput('version', verElement.data);
+                // Use environment file for setting output (GitHub Actions v3+)
+                const outputFile = process.env.GITHUB_OUTPUT;
+                if (outputFile) {
+                    fs.appendFileSync(outputFile, `version=${verElement.data}\n`);
+                } else {
+                    console.warn('GITHUB_OUTPUT environment variable is not set. Cannot set output.');
+                }
             }
             else
             {
