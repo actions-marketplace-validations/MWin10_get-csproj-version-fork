@@ -29,5 +29,5 @@ outputs:
   version:
     description: Retrieved and verified version string
 runs:
-  using: node20
+  using: node24
   main: dist/index.js
